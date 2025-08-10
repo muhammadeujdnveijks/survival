@@ -8,7 +8,7 @@ public class TerrainChecker : MonoBehaviour
     [SerializeField] private float coneAngle = 45f;
     [SerializeField] private float rayLength = 1f;
     [SerializeField] private int rayCount = 400;
-    public bool isColayder{ get; private set;} = false;
+    public bool IsColayder{ get; private set;} = false;
 
     private List<Vector3> coneDirections = new List<Vector3>();
 
@@ -18,22 +18,30 @@ public class TerrainChecker : MonoBehaviour
         GenerateConeDirections(coneDirection.normalized);
     }
 
-    public void Luch(List<Vector3> directions)
+    private void Luch(List<Vector3> directions)
     {
         foreach (Vector3 luch in directions)
         {
             RaycastHit jump;
             if (Physics.Raycast(transform.position, luch, out jump, 1.05f))
             {
-                return true;
+                IsColayder = true;
+                return;
             }
         }
-        return false;
+
+        IsColayder = false;
     }
 
     void Update()
     {
         DrawCone(transform.position, coneDirections, rayLength);
+
+    }
+
+    private void FixedUpdate()
+    {
+        Luch(coneDirections);
     }
 
     void GenerateConeDirections(Vector3 direction)
@@ -72,9 +80,4 @@ public class TerrainChecker : MonoBehaviour
             Debug.DrawRay(origin, dir * length, Color.red);
         }
     }
-
-    //Добавь функцию для проверки столкновения с поверхностью. Вызывай её в FixedUpdate
-    //Добавь флаг(bool переменную). Если хоть 1 луч столкнулся с кем-то, то флаг поднимай. Иначе опускай
-    //Читай флаг в Controller-е. Если флаг поднят, то прыгть можно, иначе нет
-    //Добавь относительное смещение, чтоб лучи стартовали не от центра капсулы, а чуть ниже
 }

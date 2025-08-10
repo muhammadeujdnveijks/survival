@@ -29,9 +29,9 @@ public class Controller : MonoBehaviour
         {
             body.AddForce(transform.right * speed);
         }
-        if (body.velocity.magnitude > 10)
+        if (body.linearVelocity.magnitude > 10)
         {
-            body.velocity = body.velocity.normalized * 10;
+            body.linearVelocity = body.linearVelocity.normalized * 10;
         }
     }
 
@@ -45,7 +45,7 @@ public class Controller : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             RaycastHit luch;
-            if (Physics.Raycast(transform.position, -Vector3.up, out luch, 1.05f))
+            if (true)///
             {
                 body.AddForce(Vector3.up * jumpspeed);
             }
