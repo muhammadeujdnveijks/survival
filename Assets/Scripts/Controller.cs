@@ -45,7 +45,7 @@ public class Controller : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             RaycastHit luch;
-            if (Physics.Raycast(transform.position, -Vector3.up, out luch, 1.05f))
+            if (true)///
             {
                 body.AddForce(Vector3.up * jumpspeed);
             }
