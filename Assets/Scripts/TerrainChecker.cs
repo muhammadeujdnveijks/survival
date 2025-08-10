@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class TerrainChecker : MonoBehaviour
@@ -7,6 +8,7 @@ public class TerrainChecker : MonoBehaviour
     [SerializeField] private float coneAngle = 45f;
     [SerializeField] private float rayLength = 1f;
     [SerializeField] private int rayCount = 400;
+    public bool isColayder{ get; private set;} = false;
 
     private List<Vector3> coneDirections = new List<Vector3>();
 
@@ -14,6 +16,19 @@ public class TerrainChecker : MonoBehaviour
     {
 
         GenerateConeDirections(coneDirection.normalized);
+    }
+
+    public void Luch(List<Vector3> directions)
+    {
+        foreach (Vector3 luch in directions)
+        {
+            RaycastHit jump;
+            if (Physics.Raycast(transform.position, luch, out jump, 1.05f))
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     void Update()
@@ -43,7 +58,7 @@ public class TerrainChecker : MonoBehaviour
                                                   0f);
 
                 Vector3 localDir = rot * Vector3.forward;
-                Vector3 worldDir = toDirection * localDir.normalized; 
+                Vector3 worldDir = toDirection * localDir.normalized;
 
                 coneDirections.Add(worldDir);
             }
