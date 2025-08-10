@@ -29,9 +29,9 @@ public class Controller : MonoBehaviour
         {
             body.AddForce(transform.right * speed);
         }
-        if (body.linearVelocity.magnitude > 10)
+        if (body.velocity.magnitude > 10)
         {
-            body.linearVelocity = body.linearVelocity.normalized * 10;
+            body.velocity = body.velocity.normalized * 10;
         }
     }
 
