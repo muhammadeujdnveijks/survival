@@ -8,7 +8,8 @@ public class TerrainChecker : MonoBehaviour
     [SerializeField] private float coneAngle = 45f;
     [SerializeField] private float rayLength = 1f;
     [SerializeField] private int rayCount = 400;
-    public bool IsColayder{ get; private set;} = false;
+    [SerializeField] private Vector3 offset;
+    public bool IsColayder { get; private set; } = false;
 
     private List<Vector3> coneDirections = new List<Vector3>();
 
@@ -23,7 +24,7 @@ public class TerrainChecker : MonoBehaviour
         foreach (Vector3 luch in directions)
         {
             RaycastHit jump;
-            if (Physics.Raycast(transform.position, luch, out jump, 1.05f))
+            if (Physics.Raycast(transform.position + offset, luch, out jump, 1.05f))
             {
                 IsColayder = true;
                 return;
@@ -35,7 +36,7 @@ public class TerrainChecker : MonoBehaviour
 
     void Update()
     {
-        DrawCone(transform.position, coneDirections, rayLength);
+        DrawCone(transform.position + offset, coneDirections, rayLength);
 
     }
 

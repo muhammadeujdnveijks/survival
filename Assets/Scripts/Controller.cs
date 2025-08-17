@@ -10,7 +10,9 @@ public class Controller : MonoBehaviour
     private Rigidbody body;
     private Vector3 rotations;
     private Camera camera;
-    [SerializeField]private float jumpspeed;
+    [SerializeField] private TerrainChecker check;
+    [SerializeField] private float jumpspeed;
+    [SerializeField] private float RaiDistanse = 3.5f;
     void move()
     {
         if (Input.GetKey(KeyCode.W))
@@ -25,13 +27,23 @@ public class Controller : MonoBehaviour
         {
             body.AddForce(-transform.right * speed);
         }
+
+        
         if (Input.GetKey(KeyCode.D))
         {
-            body.AddForce(transform.right * speed);
-        }
-        if (body.velocity.magnitude > 10)
-        {
             body.velocity = body.velocity.normalized * 10;
+        }
+    }
+
+    void crosshair()
+    {
+        Vector3 ecran = new Vector3(Screen.width / 2, Screen.height / 2, 0);
+        Ray ray = camera.ScreenPointToRay(ecran);
+        RaycastHit luchik;
+        Debug.DrawRay(ray.origin, ray.direction * RaiDistanse, Color.white);
+        if (Physics.Raycast(ray, out luchik, RaiDistanse))
+        {
+
         }
     }
 
@@ -45,7 +57,7 @@ public class Controller : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             RaycastHit luch;
-            if (true)///
+            if (check.IsColayder)
             {
                 body.AddForce(Vector3.up * jumpspeed);
             }
@@ -73,6 +85,7 @@ public class Controller : MonoBehaviour
         move();
         rotation();
         jump();
+        crosshair();
     }
     
 }
