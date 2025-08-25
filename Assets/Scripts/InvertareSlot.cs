@@ -1,18 +1,32 @@
 using System.Collections;
 using System.Collections.Generic;
+using Microsoft.Unity.VisualStudio.Editor;
 using UnityEngine;
 
 public class InvertareSlot : MonoBehaviour
 {
-    // Start is called before the first frame update
+    [SerializeField] private Image iconka;
+    [SerializeField] private Image icon;
+    [SerializeField] private Color Active;
+    [SerializeField] private Color dontActive;
+    private bool proverkaColor;
+
+
     void Start()
     {
-        
-    }
 
-    // Update is called once per frame
+    }
     void Update()
     {
-        
+
+    }
+
+    void ColorActive()
+    {
+        iconka.
+    }
+    void DontActive()
+    {
+
     }
 }

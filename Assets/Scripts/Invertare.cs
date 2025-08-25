@@ -4,15 +4,36 @@ using UnityEngine;
 
 public class Invertare : MonoBehaviour
 {
-    // Start is called before the first frame update
+    [SerializeField] private List<InvertareSlot> slots = new List<InvertareSlot>();
+    private int indexActiv = 0;
+
     void Start()
     {
-        
+
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        slot();
+    }
+
+    void slot()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            indexActiv = 0;
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            indexActiv = 1;
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            indexActiv = 2;
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            indexActiv = 3;
+        }
     }
 }
